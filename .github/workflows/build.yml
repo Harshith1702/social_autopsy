@@ -20,6 +20,9 @@ jobs:
       - name: Bump Kotlin version
         run: sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
 
+      - name: Pin compileSdkVersion
+        run: sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdkVersion 34/' android/app/build.gradle
+
       - run: flutter pub get
 
       - run: flutter build apk --release
