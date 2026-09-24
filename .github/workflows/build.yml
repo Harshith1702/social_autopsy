@@ -14,10 +14,12 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
-      - name: Install Android SDK platform 35
+      - uses: android-actions/setup-android@v3
+
+      - name: Accept licenses and install SDK platform 35
         run: |
-          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "platforms;android-35"
+          yes | sdkmanager --licenses || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Generate missing platform files
         run: flutter create --platforms=android .
