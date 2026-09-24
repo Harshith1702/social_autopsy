@@ -17,6 +17,9 @@ jobs:
       - name: Generate missing platform files
         run: flutter create --platforms=android .
 
+      - name: Bump Kotlin version
+        run: sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
+
       - run: flutter pub get
 
       - run: flutter build apk --release
