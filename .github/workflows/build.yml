@@ -14,14 +14,16 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
+      - name: Install Android SDK platform 35
+        run: |
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "platforms;android-35"
+
       - name: Generate missing platform files
         run: flutter create --platforms=android .
 
       - name: Bump Kotlin version
         run: sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
-
-      - name: Pin compileSdkVersion
-        run: sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdkVersion 34/' android/app/build.gradle
 
       - run: flutter pub get
 
