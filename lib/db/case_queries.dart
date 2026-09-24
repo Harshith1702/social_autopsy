@@ -14,7 +14,7 @@ Future<Map<String, int>> categoryBreakdown() async {
 Future<({double initial, double recheck})> severityDecay() async {
   final rows = await DBHelper.getAllCases();
   final rechecked = rows.where((r) => r['severity_recheck'] != null);
-  if (rechecked.isEmpty) return (initial: 0, recheck: 0);
+  if (rechecked.isEmpty) return (initial: 0.0, recheck: 0.0);
 
   final initAvg = rechecked.map((r) => r['severity_initial'] as int).average;
   final rechkAvg = rechecked.map((r) => r['severity_recheck'] as int).average;
